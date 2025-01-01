@@ -22,15 +22,6 @@ export default function AuthenticatedLayout({ header, children }) {
                                     <ApplicationLogo className="block h-9 w-auto fill-current text-gray-800" />
                                 </Link>
                             </div>
-
-                            <div className="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                                {/* <NavLink
-                                    href={route('chat')}
-                                    active={route().current('chat')}
-                                >
-                                    chat
-                                </NavLink> */}
-                            </div>
                         </div>
 
                         <div className="hidden sm:ms-6 sm:flex sm:items-center">

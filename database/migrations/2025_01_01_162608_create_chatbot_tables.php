@@ -19,7 +19,7 @@ return new class extends Migration {
 
         Schema::create('messages', function (Blueprint $table) {
             $table->id();
-            $table->enum('type', ['user', 'bot']);
+            $table->boolean('is_user')->default(false);
             $table->text('content');
             $table->timestamps();
 

@@ -118,15 +118,6 @@ export default function AuthenticatedLayout({ header, children }) {
                         " sm:hidden"
                     }
                 >
-                    <div className="space-y-1 pb-3 pt-2">
-                        <ResponsiveNavLink
-                            href={route("chat")}
-                            active={route().current("chat")}
-                        >
-                            Chat
-                        </ResponsiveNavLink>
-                    </div>
-
                     <div className="border-t border-gray-200 pb-1 pt-4">
                         <div className="px-4">
                             <div className="text-base font-medium text-gray-800">

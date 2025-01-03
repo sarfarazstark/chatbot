@@ -10,7 +10,7 @@ return new class extends Migration {
      */
     public function up(): void {
         Schema::create('messages', function (Blueprint $table) {
-            $table->id();
+            $table->bigIncrements('id')->primary();
             $table->boolean('is_user')->default(false);
             $table->text('content');
             $table->timestamps();

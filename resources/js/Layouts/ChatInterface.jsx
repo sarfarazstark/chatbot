@@ -1,6 +1,8 @@
 "use client";
 
 import { useState } from "react";
+import { useForm } from "react-hook-form";
+
 import {
     MessageSquare,
     Plus,
@@ -12,107 +14,64 @@ import {
     User,
     ChevronDown,
     Menu,
+    ChevronRight,
+    ChevronLeft,
 } from "lucide-react";
 
-export default function ChatInterface() {
-    const [chats, setChats] = useState([
-        { id: 1, text: "what can you do for me ?" },
-        { id: 2, text: "write me short joke for web development tu..." },
-        { id: 3, text: "top 10 most used css triks." },
-        { id: 4, text: "easy way to join foang" },
-        { id: 5, text: "how to learn front end web development" },
-        { id: 6, text: "Could you write a basic chapter 1 tutorial fo..." },
-    ]);
+export default function ChatInterface(props) {
+    const { chats, messages } = props;
 
-    const [messages, setMessages] = useState([
-        {
-            id: 1,
-            content:
-                "ok, write me short joke for web development tutorial starting.",
-            isUser: true,
-        },
-        {
-            id: 2,
-            content: `Sure, here's a short joke for a web development tutorial starting:
-
-Why was the web developer always cold?
-Because he left his Windows open!`,
-            isUser: false,
-        },
-        {
-            id: 3,
-            content:
-                "Could you write a basic chapter 1 tutorial for JavaScript for me ?",
-            isUser: true,
-        },
-        {
-            id: 4,
-            content: `Chapter 1: Getting Started with JavaScript and CSS
-
-JavaScript and CSS are two essential technologies for building modern web applications. In this chapter, we will cover the basics of JavaScript and CSS, including data types, variables, and control structures, as well as an example of how to use JavaScript and CSS together.
-
-1.1 Data Types
-
-JavaScript supports several data types, including numbers, strings, booleans, null, and undefined. Here are some examples:
-
-• Numbers: 42, 3.14, -7
-• Strings: "hello", "world", "123"
-• Booleans: true, false
-• Null: null
-• Undefined: undefined
-
-To declare a variable in JavaScript, you can use the "var" keyword, followed by the variable name and an optional initial value. Here's an example:`,
-            isUser: false,
-        },
-    ]);
+    const { data, setData, post, reset } = useForm({
+        content: "",
+    });
 
     const [inputMessage, setInputMessage] = useState("");
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
-    const handleNewChat = () => {
-        const newChat = {
-            id: chats.length + 1,
-            text: "New Chat",
-        };
-        setChats([newChat, ...chats]);
-    };
+    // const handleNewChat = () => {
+    //     const newChat = {
+    //         id: chats.length + 1,
+    //         text: "New Chat",
+    //     };
+    //     setChats([newChat, ...chats]);
+    // };
 
-    const handleSendMessage = (e) => {
-        e.preventDefault();
-        if (inputMessage.trim() === "") return;
+    // const handleSendMessage = (e) => {
+    //     e.preventDefault();
+    //     if (inputMessage.trim() === "") return;
 
-        const newMessage = {
-            id: messages.length + 1,
-            content: inputMessage,
-            isUser: true,
-        };
-        setMessages([...messages, newMessage]);
-        setInputMessage("");
+    //     const newMessage = {
+    //         id: messages.length + 1,
+    //         content: inputMessage,
+    //         isUser: true,
+    //     };
+    //     setMessages([...messages, newMessage]);
+    //     setInputMessage("");
 
-        // Simulate bot response
-        setTimeout(() => {
-            const botResponse = {
-                id: messages.length + 2,
-                content:
-                    "Thank you for your message. How else can I assist you?",
-                isUser: false,
-            };
-            setMessages((prevMessages) => [...prevMessages, botResponse]);
-        }, 1000);
-    };
+    //     // Simulate bot response
+    //     setTimeout(() => {
+    //         const botResponse = {
+    //             id: messages.length + 2,
+    //             content:
+    //                 "Thank you for your message. How else can I assist you?",
+    //             isUser: false,
+    //         };
+    //         setMessages((prevMessages) => [...prevMessages, botResponse]);
+    //     }, 1000);
+    // };
 
     const toggleSidebar = () => {
         setIsSidebarOpen(!isSidebarOpen);
     };
 
     return (
-        <div className="flex flex-col mx-auto max-w-7xl bg-gray-50 text-gray-900">
+        <div className="flex flex-col bg-gray-50 text-gray-900">
             <div className="flex flex-1 overflow-hidden">
                 {/* Sidebar */}
                 <div
-                    className={`${
-                        isSidebarOpen ? "block" : "hidden"
-                    } sm:block w-full sm:w-80 bg-white border-gray-200 border-r flex flex-col absolute sm:relative z-10`}
+                    className={`fixed inset-y-0 left-0 z-50 w-80 bg-white border-r border-gray-200 transform transition-transform duration-300 ease-in-out ${
+                        isSidebarOpen ? "translate-x-0" : "-translate-x-full"
+                    } lg:relative lg:translate-x-0`}
                 >
                     <div className="p-4 border-b border-gray-200">
                         <div className="flex justify-between items-center mb-4">
@@ -125,7 +84,7 @@ To declare a variable in JavaScript, you can use the "var" keyword, followed by 
                                 </p>
                             </div>
                             <button
-                                onClick={handleNewChat}
+                                // onClick={handleNewChat}
                                 className="p-1 hover:bg-gray-100 rounded-full"
                             >
                                 <Plus className="w-5 h-5 text-gray-600" />
@@ -133,6 +92,7 @@ To declare a variable in JavaScript, you can use the "var" keyword, followed by 
                         </div>
                     </div>
 
+                    {/* sidebar chats */}
                     <div className="flex-1 h-[calc(100vh_-_165px)] overflow-y-auto [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-track]:rounded-full [&::-webkit-scrollbar-track]:bg-transparent [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-gray-300">
                         {chats.map((chat) => (
                             <button
@@ -146,6 +106,20 @@ To declare a variable in JavaScript, you can use the "var" keyword, followed by 
                             </button>
                         ))}
                     </div>
+
+                    <button
+                        onClick={toggleSidebar}
+                        className={`absolute top-16 -right-6 z-50 px-1 py-1 bg-gray-950 border border-gray-200 rounded-lg shadow-md hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-600 focus:ring-opacity-50 lg:hidden`}
+                        aria-label={
+                            isSidebarOpen ? "Close sidebar" : "Open sidebar"
+                        }
+                    >
+                        {isSidebarOpen ? (
+                            <ChevronLeft className="w-5 h-5 text-white" />
+                        ) : (
+                            <ChevronRight className="w-5 h-5 text-white" />
+                        )}
+                    </button>
                 </div>
 
                 {/* Chat Area */}
@@ -188,10 +162,10 @@ To declare a variable in JavaScript, you can use the "var" keyword, followed by 
                     </div>
 
                     <form
-                        onSubmit={handleSendMessage}
+                        // onSubmit={handleSendMessage}
                         className="p-4 border-t border-gray-200"
                     >
-                        <div className="flex items-center gap-2">
+                        <div className="flex items-center gap-2 max-w-2xl mx-auto">
                             <input
                                 type="text"
                                 value={inputMessage}

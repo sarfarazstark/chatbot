@@ -429,7 +429,7 @@ export default function Welcome({ auth }) {
                         </div>
                         <div className="mt-8 border-t border-gray-200 pt-8">
                             <p className="text-center text-gray-400">
-                                &copy; 2024 GeminiChat. All rights reserved.
+                                &copy; 2025 Chatbot. All rights reserved.
                             </p>
                         </div>
                     </div>

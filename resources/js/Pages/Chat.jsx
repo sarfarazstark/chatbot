@@ -2,11 +2,11 @@ import { Head } from "@inertiajs/react";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import ChatInterface from "@/Layouts/ChatInterface";
 
-export default function Chatbot() {
+export default function Chatbot({ chats }) {
     return (
         <AuthenticatedLayout>
             <Head title="Chat" />
-            <ChatInterface />
+            {/* <ChatInterface chats={chats} /> */}
         </AuthenticatedLayout>
     );
 }

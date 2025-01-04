@@ -108,21 +108,23 @@ function ChatDemo() {
                         }`}
                     >
                         <div
-                            className={`flex items-start space-x-2 max-w-[80%] ${
+                            className={`flex items-start space-x-2 max-w-[90%] ${
                                 message.isUser
                                     ? "flex-row-reverse space-x-reverse"
                                     : "flex-row"
                             }`}
                         >
                             <div
-                                className={`p-1 rounded-full ${
+                                className={`p-2 rounded-full ${
                                     message.isUser ? "bg-black" : "bg-gray-100"
                                 }`}
                             >
                                 {message.isUser ? (
-                                    <MessageSquare className="h-5 w-5 text-white" />
+                                    <span className="text-white text-sm h-5 w-5 flex items-center justify-center">
+                                        U
+                                    </span>
                                 ) : (
-                                    <ApplicationLogo className="h-7 w-28 text-black" />
+                                    <MessageSquare className="h-5 w-5 text-black" />
                                 )}
                             </div>
                             <div

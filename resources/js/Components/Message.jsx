@@ -1,14 +1,14 @@
 import React from "react";
-import { Remarkable } from "remarkable";
+import showdown from "showdown";
 
 const Message = ({ content }) => {
     // Function to parse markdown content and fix line breaks
     const markdownToHtml = (markdownContent) => {
-        // Initialize a new Remarkable converter
-        const md = new Remarkable();
+        // Initialize a new Showdown converter
+        const converter = new showdown.Converter();
 
         // First, parse the markdown content to HTML
-        const htmlContent = md.render(markdownContent);
+        const htmlContent = converter.makeHtml(markdownContent);
 
         // Replace any extra line breaks between tags, avoiding empty paragraphs
         return htmlContent

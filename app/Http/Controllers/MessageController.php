@@ -65,7 +65,7 @@ class MessageController extends Controller {
             // Fetch last 10 messages (both user and model messages)
             $messages = Message::where('user_id', Auth::id())
                 ->latest()
-                ->take(10)
+                ->take(20)
                 ->get()
                 ->reverse();  // Reverse to maintain the correct order of messages
 

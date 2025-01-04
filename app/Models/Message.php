@@ -4,20 +4,17 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Message extends Model {
     use HasFactory;
 
-    protected $fillable = [
-        'chat_id',
-        'content',
-        'is_user',
-    ];
+    protected $fillable = ['user_id', 'content', 'is_user'];
 
     /**
-     * Relationship: A message belongs to a chat.
+     * Get the user that owns the message.
      */
-    public function chat() {
-        return $this->belongsTo(Chat::class);
+    public function user(): BelongsTo {
+        return $this->belongsTo(User::class);
     }
 }

@@ -6,6 +6,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class User extends Authenticatable {
     /** @use HasFactory<\Database\Factories\UserFactory> */
@@ -44,7 +45,10 @@ class User extends Authenticatable {
         ];
     }
 
-    public function chats() {
-        return $this->hasMany(Chat::class);
+    /**
+     * Get all messages for the user.
+     */
+    public function messages(): HasMany {
+        return $this->hasMany(Message::class);
     }
 }

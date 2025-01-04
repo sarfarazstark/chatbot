@@ -1,9 +1,7 @@
 <?php
 
-use App\Http\Controllers\ChatController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\MessageController;
-use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -14,11 +12,11 @@ Route::get('/', function () {
     ]);
 });
 
-Route::middleware(['auth', 'verified'])->group(function () {
+Route::middleware('auth')->group(function () {
     Route::get('/chat', [MessageController::class, 'index'])->name('chat'); // Show chat interface
-    Route::post('/chat', [MessageController::class, 'store'])->name('messages.store'); // Send a new message
+    Route::post('/chat', [MessageController::class, 'store'])->name('chat'); // Send a new message
+    Route::delete('/chat', [MessageController::class, 'destroy'])->name('message.destroy');
 });
-
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

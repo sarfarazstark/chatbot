@@ -9,9 +9,9 @@ const getGeminiResponse = async (message) => {
             headers: {
                 "Content-Type": "application/json",
                 Accept: "application/json",
-                "X-CSRF-TOKEN": document.querySelector(
-                    'meta[name="csrf-token"]'
-                ).content,
+                "X-CSRF-TOKEN": document
+                    .querySelector('meta[name="csrf-token"]')
+                    .getAttribute("content"),
             },
             body: JSON.stringify({ message }),
         });
@@ -105,7 +105,7 @@ export default function Messages({ messages: initialMessages }) {
                             >
                                 <Message content={message.content} />
                             </div>
-                            {message.is_user === 1 && (
+                            {!!message.is_user && (
                                 <div className="w-8 h-8 rounded-full bg-gray-800 flex items-center justify-center flex-shrink-0">
                                     <span className="text-white text-sm">
                                         U

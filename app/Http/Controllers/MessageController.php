@@ -17,6 +17,15 @@ class MessageController extends Controller {
      */
     public function index() {
         $messages = Message::with('user')->where('user_id', Auth::id())->orderBy('created_at', 'asc')->get();
+        // only return content id is_user created_at thats it
+        $messages = $messages->map(function ($message) {
+            return [
+                'id' => $message->id,
+                'content' => $message->content,
+                'is_user' => $message->is_user,
+                'created_at' => $message->created_at->toDateTimeString(),
+            ];
+        });
 
         return Inertia::render('Chat', [
             'messages' => $messages,
@@ -53,15 +62,40 @@ class MessageController extends Controller {
                 throw new \Exception('Gemini API key not configured');
             }
 
+            // Fetch last 10 messages (both user and model messages)
+            $messages = Message::where('user_id', Auth::id())
+                ->latest()
+                ->take(10)
+                ->get()
+                ->reverse();  // Reverse to maintain the correct order of messages
+
+            // Prepare the message content in the required format
+            $formattedMessages = $messages->map(function ($message) {
+                return [
+                    'role' => $message->is_user ? 'user' : 'model',  // 'user' or 'model' based on is_user field
+                    'parts' => [
+                        ['text' => $message->content]  // Ensure only 'text' is included
+                    ]
+                ];
+            })->toArray();
+
+            // Add the current message as the last part with 'user' role
+            $formattedMessages = array_merge($formattedMessages, [
+                [
+                    'role' => 'user',
+                    'parts' => [
+                        ['text' => $validated['message'] . "\nRespond only to this message."]
+                    ]
+                ]
+            ]);
+
+            // Prepare API request body to match the structure
+            $requestBody = [
+                'contents' => $formattedMessages
+            ];
+
             // Prepare API request
             $apiUrl = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-exp:generateContent?key={$key}";
-            $requestBody = [
-                'contents' => [
-                    'parts' => [
-                        ['text' => $validated['message']],
-                    ],
-                ],
-            ];
 
             Log::info('Sending request to Gemini API', [
                 'url' => $apiUrl,
@@ -106,6 +140,15 @@ class MessageController extends Controller {
 
             // Return whole conversation
             $messages = Message::with('user')->where('user_id', Auth::id())->orderBy('created_at', 'asc')->get();
+            // only return content id is_user created_at thats it
+            $messages = $messages->map(function ($message) {
+                return [
+                    'id' => $message->id,
+                    'content' => $message->content,
+                    'is_user' => $message->is_user,
+                    'created_at' => $message->created_at->toDateTimeString(),
+                ];
+            });
 
             return response()->json([
                 'success' => true,

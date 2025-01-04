@@ -115,14 +115,14 @@ function ChatDemo() {
                             }`}
                         >
                             <div
-                                className={`p-2 rounded-full ${
+                                className={`p-1 rounded-full ${
                                     message.isUser ? "bg-black" : "bg-gray-100"
                                 }`}
                             >
                                 {message.isUser ? (
                                     <MessageSquare className="h-5 w-5 text-white" />
                                 ) : (
-                                    <ApplicationLogo className="h-5 w-10 text-black" />
+                                    <ApplicationLogo className="h-7 w-28 text-black" />
                                 )}
                             </div>
                             <div
@@ -179,7 +179,7 @@ export default function Welcome({ auth }) {
                             </div>
 
                             {/* Desktop Navigation */}
-                            <div className="hidden md:flex items-center space-x-8">
+                            <div className="flex items-center space-x-8">
                                 {auth.user ? (
                                     <Link
                                         href={route("chat")}
@@ -209,20 +209,6 @@ export default function Welcome({ auth }) {
                             </div>
 
                             {/* Mobile menu button */}
-                            <div className="md:hidden flex items-center">
-                                <button
-                                    onClick={() =>
-                                        setMobileMenuOpen(!mobileMenuOpen)
-                                    }
-                                    className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100"
-                                >
-                                    {mobileMenuOpen ? (
-                                        <X className="h-6 w-6" />
-                                    ) : (
-                                        <Menu className="h-6 w-6" />
-                                    )}
-                                </button>
-                            </div>
                         </div>
                     </div>
 

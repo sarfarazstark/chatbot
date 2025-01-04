@@ -1,5 +1,6 @@
 import { MessageSquare, Send, Loader2 } from "lucide-react";
 import { useState, useRef, useEffect } from "react";
+import Message from "./Message";
 
 const getGeminiResponse = async (message) => {
     try {
@@ -102,9 +103,7 @@ export default function Messages({ messages: initialMessages }) {
                                         : "bg-white border border-gray-200 text-gray-800"
                                 }`}
                             >
-                                <div className="whitespace-pre-wrap text-sm sm:text-base">
-                                    {message.content}
-                                </div>
+                                <Message content={message.content} />
                             </div>
                             {message.is_user === 1 && (
                                 <div className="w-8 h-8 rounded-full bg-gray-800 flex items-center justify-center flex-shrink-0">

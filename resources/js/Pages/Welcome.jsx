@@ -1,10 +1,8 @@
 import { Head, Link } from "@inertiajs/react";
 import { useEffect, useState } from "react";
 import {
-    Bot,
     Menu,
     X,
-    Github,
     MessageSquare,
     Brain,
     Zap,
@@ -14,7 +12,6 @@ import {
     Stethoscope,
     GraduationCap,
     ShoppingBag,
-    MessageCircle,
 } from "lucide-react";
 import ApplicationLogo from "@/Components/ApplicationLogo";
 

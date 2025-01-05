@@ -2,6 +2,16 @@
 
 Follow these steps to install and set up the Laravel Inertia project on your local machine.
 
+## Project Stack
+
+- Laravel ![Laravel](https://img.shields.io/badge/Laravel-8.x-red)
+- Inertia.js ![Inertia.js](https://img.shields.io/badge/Inertia.js-0.8.x-darkblue)
+- React ![React](https://img.shields.io/badge/React-17.x-blue)
+- Tailwind CSS ![Tailwind CSS](https://img.shields.io/badge/Tailwind%20CSS-2.x-skyblue)
+- Sqlite ![Sqlite](https://img.shields.io/badge/Sqlite-3.x-yellow)
+- Gemini API ![Gemini API](https://img.shields.io/badge/Gemini%20API-1.x-blue)
+- Showdown (for markdown) ![Showdown](https://img.shields.io/badge/Showdown-1.x-red)
+
 ## Prerequisites
 
 Ensure you have the following installed:

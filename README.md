@@ -1,4 +1,4 @@
-# Installing Laravel Inertia Project Locally
+# This is a gemini-api powered chatbot application built with Laravel, Inertia and React
 
 Follow these steps to install and set up the Laravel Inertia project on your local machine.
 

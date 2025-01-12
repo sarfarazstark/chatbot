@@ -184,7 +184,7 @@ export default function Welcome({ auth }) {
                             <div className="flex items-center space-x-8">
                                 {auth.user ? (
                                     <Link
-                                        href={route("chat")}
+                                        href={route("chat.index")}
                                         className="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20]"
                                     >
                                         <div className="flex items-center space-x-2">
@@ -220,7 +220,7 @@ export default function Welcome({ auth }) {
                             <div className="px-2 pt-2 pb-3 space-y-1">
                                 {auth.user ? (
                                     <Link
-                                        href={route("chat")}
+                                        href={route("chat.index")}
                                         className="rounded-md px-3 font-bold py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20]"
                                     >
                                         Chat

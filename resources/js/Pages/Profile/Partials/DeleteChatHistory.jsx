@@ -23,7 +23,7 @@ export default function DeleteChatHistory({ className = "" }) {
     const deleteHistory = (e) => {
         e.preventDefault();
 
-        destroy(route("message.destroy"), {
+        destroy(route("chat.destroy"), {
             preserveScroll: true,
             onSuccess: () => closeModal(),
             onFinish: () => reset(),
